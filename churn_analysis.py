@@ -15,6 +15,9 @@ data["Churn"] = data["Churn"].map({"Yes" : 1, "No" : 0})
 # dropping the column because it is not useful
 data = data.drop(["customerID"], axis=1)
 
+# one-hot encoding categorical variables
+data = pd.get_dummies(data, drop_first=True)
 
-print(data["Churn"].value_counts())
-print(data.head())
+
+print(data.shape)
+print(data.columns)
