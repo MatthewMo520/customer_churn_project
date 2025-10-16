@@ -3,6 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+import matplotlib.pyplot as plt
 
 # Load the dataset
 data = pd.read_csv('customer_churn.csv')
@@ -57,3 +59,43 @@ print(f"Random Forest Model Accuracy: {rf_accuracy:.4f}")
 print("Model Comparison:")
 print(f"Logistic Regression Accuracy: {accuracy * 100:.4f}%")
 print(f"Random Forest Accuracy: {rf_accuracy * 100:.4f}%")
+
+# detailed classification report for Random Forest
+print("\nDETAILED EVALUATION")
+print("Random Forest Confusion Matrix:")
+cm = confusion_matrix(y_test, rf_y_pred)
+print(cm)
+print("\nExplanation:")
+print(f"Correctly predicted NO churn: {cm[0][0]}")
+print(f"Incorrectly predicted YES(false alarm): {cm[0][1]}")
+print(f"Incorrectly predicted NO(missed churn): {cm[1][0]}")
+print(f"Correctly predicted YES churn: {cm[1][1]}")
+
+print("\nRandom Forest Classification Report:")
+print(classification_report(y_test, rf_y_pred, target_names=["No Churn", "Churn"]))
+
+# feature importance visualization for Random Forest
+print("Feature Importance from Random Forest Model:")
+
+# Get feature importances
+importances = rf_model.feature_importances_
+
+feature_importance_df = pd.DataFrame({
+    'Feature': X.columns,
+    'Importance': importances
+}).sort_values(by='Importance', ascending=False)
+
+# show top 10 important features
+print("Top 10 Important Features:")
+print(feature_importance_df.head(10))
+
+#visualization
+plt.figure(figsize=(10, 6))
+top_10 = feature_importance_df.head(10)
+plt.barh(top_10['Feature'], top_10['Importance'])
+plt.xlabel('Importance Score')
+plt.title('Top 10 Feature That Influence Customer Churn')
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
+
