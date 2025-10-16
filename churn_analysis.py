@@ -103,6 +103,7 @@ plt.show()
 plt.savefig('feature_importance.png', dpi =  300, bbox_inches='tight')
 print("Feature importance chart saved as 'feature_importance.png'")
 
+# summary of the project
 print("\n" + "-"*50)
 print("PROJECT SUMMARY")
 print("-"*50)
