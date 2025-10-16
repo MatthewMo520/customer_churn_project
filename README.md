@@ -25,7 +25,6 @@ Predict whether a customer will churn based on their account information, servic
 ## 📁 Project Structure
 ```
 customer_churn_project/
-│
 ├── churn_analysis.py          
 ├── customer-churn.csv  # Dataset
 ├── feature_importance.png  
