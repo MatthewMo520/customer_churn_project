@@ -2,7 +2,7 @@
 
 A machine learning project that predicts which telecom customers are likely to leave (churn) using classification algorithms.
 
-## Project Overview
+## 📊 Project Overview
 
 This project analyzes customer data from a telecommunications company to predict churn. The model helps identify at-risk customers so the company can take proactive retention measures.
 
@@ -11,7 +11,7 @@ This project analyzes customer data from a telecommunications company to predict
 - **Features**: 30 features including contract type, monthly charges, tenure, services used, etc.
 - **Target Variable**: Churn (Yes/No)
 
-## Objective
+## 🎯 Objective
 
 Predict whether a customer will churn based on their account information, services, and usage patterns.
 
@@ -26,7 +26,7 @@ Predict whether a customer will churn based on their account information, servic
 ```
 customer_churn_project/
 ├── churn_analysis.py          
-├── customer-churn.csv  # Dataset
+├── customer-churn.csv
 ├── feature_importance.png  
 ├── README.md    
 └── requirements.txt                  
