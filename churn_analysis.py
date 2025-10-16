@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestClassifier
 
 # Load the dataset
 data = pd.read_csv('customer_churn.csv')
@@ -28,6 +29,7 @@ y = data["Churn"]
 # splitting into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+#----LOGISTIC REGRESSION MODEL----#
 # training the model/ creating it
 model = LogisticRegression(max_iter=1000)
 model.fit(X_train, y_train)
@@ -37,5 +39,21 @@ y_pred = model.predict(X_test)
 
 # calculating accuracy
 accuracy = accuracy_score(y_test, y_pred)
-print(f"Model Accuracy: {accuracy:.4f}")
-print(f"That's {accuracy * 100:.2f}% accuracy!")
+
+
+#----RANDOM FOREST MODEL----#
+# training the model/ creating it
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+#making predictions and evaluating the model
+rf_y_pred = rf_model.predict(X_test)
+
+# calculating accuracy
+rf_accuracy = accuracy_score(y_test, rf_y_pred)
+print(f"Random Forest Model Accuracy: {rf_accuracy:.4f}")
+
+# comparing the two models
+print("Model Comparison:")
+print(f"Logistic Regression Accuracy: {accuracy * 100:.4f}%")
+print(f"Random Forest Accuracy: {rf_accuracy * 100:.4f}%")
