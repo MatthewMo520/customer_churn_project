@@ -89,7 +89,7 @@ feature_importance_df = pd.DataFrame({
 print("Top 10 Important Features:")
 print(feature_importance_df.head(10))
 
-#visualization
+# visualization
 plt.figure(figsize=(10, 6))
 top_10 = feature_importance_df.head(10)
 plt.barh(top_10['Feature'], top_10['Importance'])
@@ -98,4 +98,37 @@ plt.title('Top 10 Feature That Influence Customer Churn')
 plt.gca().invert_yaxis()
 plt.tight_layout()
 plt.show()
+
+# saving the chart
+plt.savefig('feature_importance.png', dpi =  300, bbox_inches='tight')
+print("Feature importance chart saved as 'feature_importance.png'")
+
+print("\n" + "-"*50)
+print("PROJECT SUMMARY")
+print("-"*50)
+print(f"""
+Dataset: Telcon Customer Churn (Kaggle link: https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+Total Customers: {len(data)}
+Features Used: {X.shape[1]}
+Target: Predict Customer Churn (Yes/No)
+
+Models Trained:
+    - Logistic Regression: {accuracy * 100:.4f}% accuracy
+    - Random Forest Classifier: {rf_accuracy * 100:.4f}% accuracy
+
+Random Forest Stats:
+    - Accuracy: {rf_accuracy * 100:.4f}%
+    - Correct Identified {cm[0,0]} loyal customers (No Churn)
+    - Caught {cm[1,1]} out of {cm[1,0] + cm[1,1]} churners
+
+Top 3 Important Features Influencing Churn:
+    1. {feature_importance_df.iloc[0]['Feature']} (Importance: {feature_importance_df.iloc[0]['Importance']:.4f})
+    2. {feature_importance_df.iloc[1]['Feature']} (Importance: {feature_importance_df.iloc[1]['Importance']:.4f})
+    3. {feature_importance_df.iloc[2]['Feature']} (Importance: {feature_importance_df.iloc[2]['Importance']:.4f})
+
+Insights:
+    - Customers with higher monthly charges are more likely to churn.
+      """)
+
+print("-"*50)
 
